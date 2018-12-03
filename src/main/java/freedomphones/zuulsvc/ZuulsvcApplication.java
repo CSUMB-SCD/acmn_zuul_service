@@ -1,5 +1,8 @@
 package freedomphones.zuulsvc;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -20,11 +23,13 @@ public class ZuulsvcApplication {
 
 	@Bean
 	public CorsFilter corsFilter() {
+		List<String> origins = new ArrayList<String>();
+		origins.add("*");
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		final CorsConfiguration config = new CorsConfiguration();
 		config.setAllowCredentials(true);
-		config.addAllowedOrigin("*");
-		config.addAllowedHeader("*");
+		config.setAllowedOrigins(origins);
+		config.setAllowedHeaders(origins);
 		config.addAllowedMethod("OPTIONS");
 		config.addAllowedMethod("HEAD");
 		config.addAllowedMethod("GET");
